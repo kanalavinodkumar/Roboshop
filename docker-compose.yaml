@@ -10,13 +10,13 @@ volumes:
   rabbitmq:
 services:
   catalogue:
-    image: catalogue:v1
+    image: kanalavinodkumar/catalogue:v1
     container_name: catalogue
     depends_on:
       - mongodb
   # docker run -d --name mongodb --network roboshop -v mongodb:/data/db mongodb:v1
   mongodb:
-    image: mongodb:v1
+    image: kanalavinodkumar/mongodb:v1
     container_name: mongodb
     volumes:
     - type: volume
@@ -34,7 +34,7 @@ services:
       volume: 
          nocopy: true
   web:
-    image: web:v1
+    image: kanalavinodkumar/web:v1
     container_name: web
     ports:
       - "80:80"
@@ -43,19 +43,19 @@ services:
       - user
       - cart
   user:
-    image: user:v1
+    image: kanalavinodkumar/user:v1
     container_name: user
     depends_on:
       - mongodb
       - redis
   cart:
-    image: cart:v1
+    image: kanalavinodkumar/cart:v1
     container_name: cart
     depends_on:
       - catalogue
       - redis
   mysql:
-    image: mysql:v1
+    image: kanalavinodkumar/mysql:v1
     container_name: mysql
     volumes:
       - type: volume
@@ -64,7 +64,7 @@ services:
         volume: 
           nocopy: true
   shipping:
-    image: shipping:v1
+    image: kanalavinodkumar/shipping:v1
     container_name: shipping
     depends_on:
       - cart
@@ -79,14 +79,14 @@ services:
         volume: 
           nocopy: true
   payment:
-    image: payment:v1
+    image: kanalavinodkumar/payment:v1
     container_name: payment
     depends_on:
       - rabbitmq
       - cart
       - user
   ratings:
-    image: ratings:v1
+    image: kanalavinodkumar/ratings:v1
     container_name: ratings
     depends_on:
       - mysql
