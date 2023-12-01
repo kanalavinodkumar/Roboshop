@@ -29,7 +29,7 @@
 
 # CMD [ "java", "-Xmn256m", "-Xmx768m", "-jar", "shipping.jar" ]
 
-FROM debian:10 AS builder
+FROM debian:latest AS builder
 RUN apt-get update && apt-get -y install maven
 WORKDIR /opt/shipping
 COPY pom.xml /opt/shipping/
